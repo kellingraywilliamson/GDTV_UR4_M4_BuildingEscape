@@ -1,0 +1,15 @@
+C:/Users/kelli/Github/GameDev/GDTV_UR4_M4_BuildingEscape/cmake-build-debug/CMakeFiles/UE4Editor-Win64-DebugGame.dir
+C:/Users/kelli/Github/GameDev/GDTV_UR4_M4_BuildingEscape/cmake-build-debug/CMakeFiles/M4_BuildingEscapeEditor-Win64-DebugGame.dir
+C:/Users/kelli/Github/GameDev/GDTV_UR4_M4_BuildingEscape/cmake-build-debug/CMakeFiles/UE4Game-Win64-DebugGame.dir
+C:/Users/kelli/Github/GameDev/GDTV_UR4_M4_BuildingEscape/cmake-build-debug/CMakeFiles/UE4Editor-Win64-Shipping.dir
+C:/Users/kelli/Github/GameDev/GDTV_UR4_M4_BuildingEscape/cmake-build-debug/CMakeFiles/UE4Editor.dir
+C:/Users/kelli/Github/GameDev/GDTV_UR4_M4_BuildingEscape/cmake-build-debug/CMakeFiles/M4_BuildingEscape-Win64-DebugGame.dir
+C:/Users/kelli/Github/GameDev/GDTV_UR4_M4_BuildingEscape/cmake-build-debug/CMakeFiles/M4_BuildingEscapeEditor-Win64-Shipping.dir
+C:/Users/kelli/Github/GameDev/GDTV_UR4_M4_BuildingEscape/cmake-build-debug/CMakeFiles/UE4Game-Win64-Shipping.dir
+C:/Users/kelli/Github/GameDev/GDTV_UR4_M4_BuildingEscape/cmake-build-debug/CMakeFiles/M4_BuildingEscapeEditor.dir
+C:/Users/kelli/Github/GameDev/GDTV_UR4_M4_BuildingEscape/cmake-build-debug/CMakeFiles/UE4Game.dir
+C:/Users/kelli/Github/GameDev/GDTV_UR4_M4_BuildingEscape/cmake-build-debug/CMakeFiles/M4_BuildingEscape-Win64-Shipping.dir
+C:/Users/kelli/Github/GameDev/GDTV_UR4_M4_BuildingEscape/cmake-build-debug/CMakeFiles/M4_BuildingEscape.dir
+C:/Users/kelli/Github/GameDev/GDTV_UR4_M4_BuildingEscape/cmake-build-debug/CMakeFiles/FakeTarget.dir
+C:/Users/kelli/Github/GameDev/GDTV_UR4_M4_BuildingEscape/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/kelli/Github/GameDev/GDTV_UR4_M4_BuildingEscape/cmake-build-debug/CMakeFiles/rebuild_cache.dir
