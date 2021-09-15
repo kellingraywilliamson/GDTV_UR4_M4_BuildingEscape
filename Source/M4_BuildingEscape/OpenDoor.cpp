@@ -20,7 +20,7 @@ void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
 	InitialYaw = GetOwner()->GetActorRotation().Yaw;
-	TargetYaw += InitialYaw;
+	OpenAngle += InitialYaw;
 	CurrentYaw = InitialYaw;
 
 	if (!PressurePlate)
@@ -56,7 +56,7 @@ void UOpenDoor::OpenDoor(const float DeltaTime)
 {
 	CurrentYaw = GetOwner()->GetActorRotation().Yaw;
 	FRotator DoorRotation = GetOwner()->GetActorRotation();
-	DoorRotation.Yaw = FMath::Lerp(CurrentYaw, TargetYaw, DeltaTime * 1.f);
+	DoorRotation.Yaw = FMath::Lerp(CurrentYaw, OpenAngle, DeltaTime * DoorOpenSpeed);
 	GetOwner()->SetActorRotation(DoorRotation);
 }
 
@@ -64,6 +64,6 @@ void UOpenDoor::CloseDoor(const float DeltaTime)
 {
 	CurrentYaw = GetOwner()->GetActorRotation().Yaw;
 	FRotator DoorRotation = GetOwner()->GetActorRotation();
-	DoorRotation.Yaw = FMath::Lerp(CurrentYaw, InitialYaw, DeltaTime * 1.f);
+	DoorRotation.Yaw = FMath::Lerp(CurrentYaw, InitialYaw, DeltaTime * DoorCloseSpeed);
 	GetOwner()->SetActorRotation(DoorRotation);
 }
