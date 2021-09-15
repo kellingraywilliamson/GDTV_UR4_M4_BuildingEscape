@@ -35,9 +35,7 @@ private:
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlate;
 
-	UPROPERTY(EditAnywhere)
-	AActor* ActorThatOpensDoor;
-
 	float InitialYaw;
 	float CurrentYaw;
+	AActor* ActorThatOpensDoor;
 };
