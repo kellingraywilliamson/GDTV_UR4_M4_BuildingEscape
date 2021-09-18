@@ -3,6 +3,7 @@
 
 #include "OpenDoor.h"
 #include "Components/PrimitiveComponent.h"
+#include "Components/AudioComponent.h"
 #include "Engine/World.h"
 #include "GameFramework/Actor.h"
 
@@ -16,6 +17,23 @@ UOpenDoor::UOpenDoor()
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
+void UOpenDoor::FindAudioComponent()
+{
+	AudioComponent = GetOwner()->FindComponentByClass<UAudioComponent>();
+
+	if (!AudioComponent)
+	{
+		UE_LOG(LogTemp, Error, TEXT("%s missing audio component!"), *GetOwner()->GetName());
+	}
+}
+
+void UOpenDoor::FindPressurePlate()
+{
+	if (!PressurePlate)
+	{
+		UE_LOG(LogTemp, Error, TEXT("%s has no pressure plate attached!"), *GetOwner()->GetName());
+	}
+}
 
 // Called when the game starts
 void UOpenDoor::BeginPlay()
@@ -25,10 +43,8 @@ void UOpenDoor::BeginPlay()
 	OpenAngle += InitialYaw;
 	CurrentYaw = InitialYaw;
 
-	if (!PressurePlate)
-	{
-		UE_LOG(LogTemp, Error, TEXT("%s has no pressure plate attached!"), *GetOwner()->GetName());
-	}
+	FindPressurePlate();
+	FindAudioComponent();
 
 	DoorLastOpened = GetWorld()->GetTimeSeconds();
 }
@@ -69,12 +85,34 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 	}
 }
 
+void UOpenDoor::PlayDoorOpenSound()
+{
+	if (AllowDoorOpenSound && AudioComponent)
+	{
+		AudioComponent->Play();
+		AllowDoorOpenSound = false;
+		AllowDoorCloseSound = true;
+	}
+}
+
 void UOpenDoor::OpenDoor(const float DeltaTime)
 {
 	CurrentYaw = GetOwner()->GetActorRotation().Yaw;
 	FRotator DoorRotation = GetOwner()->GetActorRotation();
 	DoorRotation.Yaw = FMath::Lerp(CurrentYaw, OpenAngle, DeltaTime * DoorOpenSpeed);
 	GetOwner()->SetActorRotation(DoorRotation);
+
+	PlayDoorOpenSound();
+}
+
+void UOpenDoor::PlayDoorCloseSound()
+{
+	if (AllowDoorCloseSound && AudioComponent)
+	{
+		AudioComponent->Play();
+		AllowDoorOpenSound = true;
+		AllowDoorCloseSound = false;
+	}
 }
 
 void UOpenDoor::CloseDoor(const float DeltaTime)
@@ -83,4 +121,6 @@ void UOpenDoor::CloseDoor(const float DeltaTime)
 	FRotator DoorRotation = GetOwner()->GetActorRotation();
 	DoorRotation.Yaw = FMath::Lerp(CurrentYaw, InitialYaw, DeltaTime * DoorCloseSpeed);
 	GetOwner()->SetActorRotation(DoorRotation);
+
+	PlayDoorCloseSound();
 }
