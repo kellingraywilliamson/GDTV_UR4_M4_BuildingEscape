@@ -1,6 +1,8 @@
 // (c) Adam Kellingray-Williamson, 2021
 
 #include "Grabber.h"
+
+#include "DrawDebugHelpers.h"
 #include "GameFramework/PlayerController.h"
 
 #define  OUT
@@ -36,6 +38,16 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	       *PlayerViewpointLocation.ToString(),
 	       *PlayerViewpointRotation.ToString());
 
+	// Draw a line from player showing their reach
+	const FVector LineTraceEnd = PlayerViewpointLocation + (PlayerViewpointRotation.Vector() * Reach);
+	DrawDebugLine(GetWorld(),
+	              PlayerViewpointLocation,
+	              LineTraceEnd,
+	              FColor(0, 255, 0),
+	              false,
+	              0.f,
+	              0,
+	              5);
 	// Raycast out to a certain distance
 
 	// See what it hits
