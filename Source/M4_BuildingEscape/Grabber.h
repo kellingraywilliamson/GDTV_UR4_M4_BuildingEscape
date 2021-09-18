@@ -14,17 +14,15 @@ class M4_BUILDINGESCAPE_API UGrabber : public UActorComponent
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this component's properties
 	UGrabber();
-
-protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
-public:
-	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
 	                           FActorComponentTickFunction* ThisTickFunction) override;
+
+	protected:
+	virtual void BeginPlay() override;
+	void Grab();
+	void Release();
+	FHitResult GetFirstPhysicsBodyInReach() const;
 
 private:
 	UPROPERTY(EditAnywhere)
@@ -32,7 +30,6 @@ private:
 
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
 	UInputComponent* InputComponent = nullptr;
-
-	void Grab();
-	void Release();
+	void FindPhysicsHandle();
+	void SetupInputComponent();
 };
