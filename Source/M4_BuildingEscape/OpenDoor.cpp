@@ -2,9 +2,11 @@
 
 
 #include "OpenDoor.h"
+#include "Components/PrimitiveComponent.h"
 #include "Engine/World.h"
-#include "GameFramework/PlayerController.h"
 #include "GameFramework/Actor.h"
+
+#define  OUT
 
 // Sets default values for this component's properties
 UOpenDoor::UOpenDoor()
@@ -28,8 +30,21 @@ void UOpenDoor::BeginPlay()
 		UE_LOG(LogTemp, Error, TEXT("%s has no pressure plate attached!"), *GetOwner()->GetName());
 	}
 
-	ActorThatOpensDoor = GetWorld()->GetFirstPlayerController()->GetPawn();
 	DoorLastOpened = GetWorld()->GetTimeSeconds();
+}
+
+
+float UOpenDoor::TotalMassOfActors() const
+{
+	float TotalMass = 0.f;
+	TArray<AActor*> OverlappingActors;
+	PressurePlate->GetOverlappingActors(OUT OverlappingActors);
+
+	for (AActor* OverlappingActor : OverlappingActors)
+	{
+		TotalMass += OverlappingActor->FindComponentByClass<UPrimitiveComponent>()->GetMass();
+	}
+	return TotalMass;
 }
 
 
@@ -38,7 +53,7 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (PressurePlate && PressurePlate->IsOverlappingActor(ActorThatOpensDoor))
+	if (PressurePlate && TotalMassOfActors() > MassRequiredToOpenDoor)
 	{
 		OpenDoor(DeltaTime);
 		DoorLastOpened = GetWorld()->GetTimeSeconds();
