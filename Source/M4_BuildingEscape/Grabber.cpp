@@ -52,8 +52,9 @@ FVector UGrabber::GetReachLocation()
 void UGrabber::GrabObject()
 {
 	const FHitResult ObjectInReach = GetFirstPhysicsBodyInReach();
+	AActor* ObjectHit = ObjectInReach.GetActor();
 
-	if (ObjectInReach.GetActor())
+	if (ObjectHit && PhysicsHandle)
 	{
 		UPrimitiveComponent* ComponentToGrab = ObjectInReach.GetComponent();
 		PhysicsHandle->GrabComponentAtLocation(ComponentToGrab, NAME_None, ReachLocation);
