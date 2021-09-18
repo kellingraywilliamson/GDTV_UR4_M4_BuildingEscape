@@ -1,18 +1,14 @@
 // (c) Adam Kellingray-Williamson, 2021
 
-#include "GameFramework/PlayerController.h"
 #include "Grabber.h"
+#include "GameFramework/PlayerController.h"
 
 #define  OUT
 
 // Sets default values for this component's properties
 UGrabber::UGrabber()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
-
-	// ...
 }
 
 
@@ -20,8 +16,6 @@ UGrabber::UGrabber()
 void UGrabber::BeginPlay()
 {
 	Super::BeginPlay();
-
-	UE_LOG(LogTemp, Warning, TEXT("Grabber reporting for duty!"));
 }
 
 
@@ -30,13 +24,19 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	// Get player viewpoint
 	FVector PlayerViewpointLocation;
 	FRotator PlayerViewpointRotation;
 	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
 		OUT PlayerViewpointLocation,
 		OUT PlayerViewpointRotation);
 
-	UE_LOG(LogTemp, Display, TEXT("Location: %s, Rotation: %s"), *PlayerViewpointLocation.ToString(), *PlayerViewpointRotation.ToString());
+	// Log out to test
+	UE_LOG(LogTemp, Display, TEXT("Location: %s, Rotation: %s"),
+	       *PlayerViewpointLocation.ToString(),
+	       *PlayerViewpointRotation.ToString());
 
+	// Raycast out to a certain distance
 
+	// See what it hits
 }
