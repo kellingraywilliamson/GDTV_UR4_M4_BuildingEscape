@@ -18,11 +18,8 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
 	                           FActorComponentTickFunction* ThisTickFunction) override;
 
-	protected:
+protected:
 	virtual void BeginPlay() override;
-	void Grab();
-	void Release();
-	FHitResult GetFirstPhysicsBodyInReach() const;
 
 private:
 	UPROPERTY(EditAnywhere)
@@ -30,6 +27,14 @@ private:
 
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
 	UInputComponent* InputComponent = nullptr;
-	void FindPhysicsHandle();
+	FVector PlayerViewpointLocation;
+	FRotator PlayerViewpointRotation;
+	FVector ReachLocation;
+
+	void GetPhysicsHandle();
+	FVector GetReachLocation();
+	FHitResult GetFirstPhysicsBodyInReach() const;
+	void GrabObject();
+	void ReleaseObject();
 	void SetupInputComponent();
 };
